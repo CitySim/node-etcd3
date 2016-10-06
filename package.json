@@ -1,0 +1,25 @@
+{
+  "name": "node-etcd3",
+  "version": "0.1.0",
+  "description": "node client for etcd (api v3)",
+  "main": "index.js",
+  "author": "Sven Tatter",
+  "license": "MIT",
+  "keywords": [ "etcd", "etcd3" ],
+  "homepage": "https://github.com/CitySim/node-etcd3#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CitySim/node-etcd3.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CitySim/node-etcd3/issues"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "deasync-promise": "^1.0.1",
+    "grpc": "^1.0.0"
+  },
+  "devDependencies": {}
+}
