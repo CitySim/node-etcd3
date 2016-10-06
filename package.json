@@ -5,7 +5,10 @@
   "main": "index.js",
   "author": "Sven Tatter",
   "license": "MIT",
-  "keywords": [ "etcd", "etcd3" ],
+  "keywords": [
+    "etcd",
+    "etcd3"
+  ],
   "homepage": "https://github.com/CitySim/node-etcd3#readme",
   "repository": {
     "type": "git",
@@ -15,11 +18,14 @@
     "url": "https://github.com/CitySim/node-etcd3/issues"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/ava",
+    "test-verbose": "./node_modules/.bin/ava --verbose"
   },
   "dependencies": {
     "deasync-promise": "^1.0.1",
     "grpc": "^1.0.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "ava": "^0.16.0"
+  }
 }

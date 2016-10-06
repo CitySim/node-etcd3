@@ -30,7 +30,12 @@ export class Etcd {
 	}
 
 	private getBuffer(obj): Buffer {
-		return new Buffer(JSON.stringify(obj));
+		if (obj == null)
+			return new Buffer(0);
+		else if (typeof obj === "string")
+			return new Buffer(obj);
+		else
+			return new Buffer(JSON.stringify(obj));
 	}
 
 	private async callClient(client, method, arg): Promise<any> {
@@ -60,8 +65,8 @@ export class Etcd {
 		})
 	}
 
-	setSync(key: string, value: string) { return deasyncPromise(this.set(key, value)) }
-	async set(key: string, value: string) {
+	setSync(key: string, value: any) { return deasyncPromise(this.set(key, value)) }
+	async set(key: string, value: any) {
 		return this.callClient("KV", "put", {
 			key: this.getBuffer(key),
 			value: this.getBuffer(value)

@@ -1,0 +1,13 @@
+version: "2"
+services:
+  etcd:
+    image: quay.io/coreos/etcd
+    command: etcd --listen-client-urls="http://0.0.0.0:2379" --advertise-client-urls="http://localhost:2379,http://etcd:2379" --cors="*"
+    ports:
+     - "2379:2379"
+  etcd-viewer:
+    image: nikfoundas/etcd-viewer
+    links:
+     - etcd
+    ports:
+     - "2380:8080"
