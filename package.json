@@ -19,7 +19,8 @@
   },
   "scripts": {
     "test": "./node_modules/.bin/ava",
-    "test-verbose": "./node_modules/.bin/ava --verbose"
+    "test:verbose": "./node_modules/.bin/ava --verbose",
+    "docs": "typedoc --excludeNotExported --mode modules --out docs index.ts typings/index.d.ts"
   },
   "dependencies": {
     "deasync-promise": "^1.0.1",

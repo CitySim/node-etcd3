@@ -30,7 +30,9 @@ export class Etcd {
 	}
 
 	private getBuffer(obj): Buffer {
-		if (obj == null)
+		if (Buffer.isBuffer(obj))
+			return obj;
+		else if (obj == null)
 			return new Buffer(0);
 		else if (typeof obj === "string")
 			return new Buffer(obj);
@@ -51,7 +53,16 @@ export class Etcd {
 		})
 	}
 
+	/**
+	 * blocking version of get()
+	 * @see {@link get}
+	 */
 	getSync(key: string) { return deasyncPromise(this.get(key)) }
+	/**
+	 * get a key from etcd
+	 * @param key - key to get
+	 * @return value of the key
+	 */
 	async get(key: string) {
 		return this.callClient("KV", "range", {
 			key: this.getBuffer(key)
@@ -65,7 +76,22 @@ export class Etcd {
 		})
 	}
 
+	/**
+	 * blocking version of set()
+	 * @see {@link set}
+	 */
 	setSync(key: string, value: any) { return deasyncPromise(this.set(key, value)) }
+	/**
+	 * set a key/value to etcd.
+	 * * a `Buffer` is saved as-is
+	 * * `null` is saved as an empty string
+	 * * `undefined` is saved as an empty string
+	 * * strings are saved as-is
+	 * * everthing else is tried to `JSON.stringify(value)`
+	 * @param key - etcd key to set
+	 * @param value - content to set
+	 * @return `true`
+	 */
 	async set(key: string, value: any) {
 		return this.callClient("KV", "put", {
 			key: this.getBuffer(key),

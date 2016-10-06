@@ -1,11 +1,11 @@
 # node-etcd3
 
-a node grpc client for the [etcd v3 API](https://github.com/coreos/etcd/)
+a node client for the new [etcd](https://github.com/coreos/etcd/) v3 grpc API
 
 ## Example
 
 ```javascript
-const { Etcd } = require(".");
+const { Etcd } = require("node-etcd3");
 const etcd = new Etcd();
 
 etcd.setSync("testKey", 34)

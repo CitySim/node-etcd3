@@ -4,7 +4,8 @@ import { Etcd } from "..";
 const etcd = new Etcd();
 
 let keyCounter = 0;
-test.beforeEach("create a random key", t => {
+test.beforeEach("create a random key", (t: any) => {
+	// for some reason the `t` isn't set to have a `context` in `beforeEach`
 	t.context.rkey = "test_" + keyCounter++;
 })
 
