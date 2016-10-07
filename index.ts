@@ -12,7 +12,7 @@ class EtcdError extends Error {
 	}
 }
 
-interface EtcdOptions {
+export interface EtcdOptions {
 }
 
 export class Etcd {
