@@ -1,5 +1,7 @@
 # node-etcd3
 
+[![travis](https://travis-ci.org/CitySim/node-etcd3.svg?branch=master)](https://travis-ci.org/CitySim/node-etcd3)
+
 a node client for the new [etcd](https://github.com/coreos/etcd/) v3 grpc API
 
 ## Example
