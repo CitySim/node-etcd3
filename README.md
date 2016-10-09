@@ -4,6 +4,10 @@
 
 a node client for the new [etcd](https://github.com/coreos/etcd/) v3 grpc API
 
+* supports node 4, 5 and 6
+* easy to use
+* Docs: [https://citysim.github.io/node-etcd3/classes/_index_.etcd.html]
+
 ## Example
 
 ```javascript

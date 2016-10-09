@@ -25,6 +25,7 @@
     "tsc:w": "tsc -w",
     "test": "ava",
     "test:w": "ava -w",
+    "typings": "typings",
     "typedoc": "typedoc --excludeNotExported --mode modules --out docs index.ts"
   },
   "dependencies": {
