@@ -42,7 +42,7 @@ export class Etcd {
 			return new Buffer(JSON.stringify(obj));
 	}
 
-	private async callClient(client, method, arg): Promise<any> {
+	private callClient(client, method, arg): Promise<any> {
 		return new Promise((resolve, reject) => {
 			this.clients[client][method](arg, (err, response) => {
 				if (err) {
@@ -67,7 +67,7 @@ export class Etcd {
 	 * @param key - key to get
 	 * @return value of the key
 	 */
-	async get(key: string): Promise<string> {
+	get(key: string): Promise<string> {
 		return this.callClient("KV", "range", {
 			key: new Buffer(key)
 		}).then((res) => {
@@ -93,7 +93,7 @@ export class Etcd {
 	 * @param toKey - key to end on
 	 * @return value of the key
 	 */
-	async range(fromKey: string, toKey: string): Promise<any> {
+	range(fromKey: string, toKey: string): Promise<any> {
 		return this.callClient("KV", "range", {
 			key: new Buffer(fromKey),
 			range_end: new Buffer(toKey),
@@ -125,7 +125,7 @@ export class Etcd {
 	 * @param value - content to set
 	 * @return `true`
 	 */
-	async set(key: string, value: any): Promise<boolean> {
+	set(key: string, value: any): Promise<boolean> {
 		return this.callClient("KV", "put", {
 			key: new Buffer(key),
 			value: this.getBuffer(value)
@@ -146,7 +146,7 @@ export class Etcd {
 	 * @param key - etcd key to delete
 	 * @return number of keys deleted
 	 */
-	async delete(key: string, keyTo?: string): Promise<number> {
+	delete(key: string, keyTo?: string): Promise<number> {
 		return this.callClient("KV", "deleteRange", {
 			key: new Buffer(key),
 			range_end: keyTo ? new Buffer(keyTo) : null
