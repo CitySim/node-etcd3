@@ -66,6 +66,11 @@
 				<h1 id="node-etcd3">node-etcd3</h1>
 				<p><a href="https://travis-ci.org/CitySim/node-etcd3"><img src="https://travis-ci.org/CitySim/node-etcd3.svg?branch=master" alt="travis"></a></p>
 				<p>a node client for the new <a href="https://github.com/coreos/etcd/">etcd</a> v3 grpc API</p>
+				<ul>
+					<li>supports node 4, 5 and 6</li>
+					<li>easy to use</li>
+					<li>Docs: [<a href="https://citysim.github.io/node-etcd3/classes/_index_.etcd.html">https://citysim.github.io/node-etcd3/classes/_index_.etcd.html</a>]</li>
+				</ul>
 				<h2 id="example">Example</h2>
 				<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> { Etcd } = <span class="hljs-built_in">require</span>(<span class="hljs-string">"node-etcd3"</span>);
 <span class="hljs-keyword">const</span> etcd = <span class="hljs-keyword">new</span> Etcd();
@@ -75,6 +80,12 @@ etcd.get(<span class="hljs-string">"testKey"</span>).then(<span class="hljs-func
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"testKey =&gt;"</span>, val) <span class="hljs-comment">// testKey =&gt; 34</span>
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"unset =&gt;"</span>, etcd.getSync(<span class="hljs-string">"unset"</span>)) <span class="hljs-comment">// unset =&gt; null</span>
 })
+</code></pre>
+				<h1 id="generate-static-proto-files">generate static proto files</h1>
+				<ul>
+					<li>get protoc from <a href="https://github.com/google/protobuf/releases/tag/v3.1.0">here</a></li>
+				</ul>
+				<pre><code>protoc --js_out=import_style=commonjs,binary:. rpc<span class="hljs-selector-class">.proto</span> kv<span class="hljs-selector-class">.proto</span> auth.proto
 </code></pre>
 			</div>
 		</div>

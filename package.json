@@ -17,12 +17,15 @@
   "bugs": {
     "url": "https://github.com/CitySim/node-etcd3/issues"
   },
+  "engines": {
+    "node": ">=4"
+  },
   "scripts": {
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "test": "ava",
     "test:w": "ava -w",
-    "typedoc": "typedoc --excludeNotExported --mode modules --out docs index.ts typings/index.d.ts"
+    "typedoc": "typedoc --excludeNotExported --mode modules --out docs index.ts"
   },
   "dependencies": {
     "deasync-promise": "^1.0.1",
@@ -32,6 +35,8 @@
   "devDependencies": {
     "@types/node": "^4.0.30",
     "ava": "^0.16.0",
-    "typescript": "^2.0.3"
+    "typedoc": "^0.4.5",
+    "typescript": "^2.0.3",
+    "typings": "^1.4.0"
   }
 }

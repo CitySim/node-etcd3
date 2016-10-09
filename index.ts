@@ -1,3 +1,5 @@
+/// <reference path="typings/index.d.ts" />
+
 const grpc = require("grpc");
 const deasyncPromise = require("deasync-promise");
 

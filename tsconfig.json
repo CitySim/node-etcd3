@@ -4,9 +4,6 @@
         "target": "es5",
         "noImplicitAny": false,
         "sourceMap": false,
-        "declaration": true,
-        "lib": [
-            "es2015"
-        ]
+        "declaration": true
     }
 }
