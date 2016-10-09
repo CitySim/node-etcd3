@@ -18,15 +18,20 @@
     "url": "https://github.com/CitySim/node-etcd3/issues"
   },
   "scripts": {
-    "test": "./node_modules/.bin/ava",
-    "test:verbose": "./node_modules/.bin/ava --verbose",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "test": "ava",
+    "test:w": "ava -w",
     "typedoc": "typedoc --excludeNotExported --mode modules --out docs index.ts typings/index.d.ts"
   },
   "dependencies": {
     "deasync-promise": "^1.0.1",
+    "google-protobuf": "^3.0.0",
     "grpc": "^1.0.0"
   },
   "devDependencies": {
-    "ava": "^0.16.0"
+    "@types/node": "^4.0.30",
+    "ava": "^0.16.0",
+    "typescript": "^2.0.3"
   }
 }

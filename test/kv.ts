@@ -14,58 +14,75 @@ test.beforeEach("create a random key", (t: any) => {
 	t.context.rkey = "test_" + keyCounter++;
 });
 
-test("set() return true", async (t) => {
-	t.true(await etcd.set("testKey", 34));
+test("set() return true", (t) => {
+	return etcd.set("testKey", 34).then((result) => {
+		t.true(result);
+	});
 });
 
-test("set() store string value as-is", async (t) => {
-	await etcd.set(t.context.rkey, "value");
-	let value = await etcd.get(t.context.rkey);
-	t.is(value, "value");
+test("set() store string value as-is", (t) => {
+	return etcd.set(t.context.rkey, "value").then(() => {
+		return etcd.get(t.context.rkey);
+	}).then((value) => {
+		t.is(value, "value");
+	});
 });
 
-test("set() store undefined as empty", async (t) => {
-	await etcd.set(t.context.rkey, void 0);
-	let value = await etcd.get(t.context.rkey);
-	t.is(value, "");
+test("set() store undefined as empty", (t) => {
+	return etcd.set(t.context.rkey, void 0).then(() => {
+		return etcd.get(t.context.rkey);
+	}).then((value) => {
+		t.is(value, "");
+	});
 });
 
-test("set() store null as empty", async (t) => {
-	await etcd.set(t.context.rkey, null);
-	let value = await etcd.get(t.context.rkey);
-	t.is(value, "");
+test("set() store null as empty", (t) => {
+	return etcd.set(t.context.rkey, null).then(() => {
+		return etcd.get(t.context.rkey);
+	}).then((value) => {
+		t.is(value, "");
+	});
 });
 
-test("set() store number as string", async (t) => {
-	await etcd.set(t.context.rkey, 34);
-	let value = await etcd.get(t.context.rkey);
-	t.is(value, "34");
+test("set() store number as string", (t) => {
+	return etcd.set(t.context.rkey, 34).then(() => {
+		return etcd.get(t.context.rkey);
+	}).then((value) => {
+		t.is(value, "34");
+	});
 });
 
-test("set() store JSON for object", async (t) => {
+test("set() store JSON for object", (t) => {
 	let object = { test: 34 };
-	await etcd.set(t.context.rkey, object);
-	let value = await etcd.get(t.context.rkey);
-	t.is(value, JSON.stringify(object));
+	return etcd.set(t.context.rkey, object).then(() => {
+		return etcd.get(t.context.rkey);
+	}).then((value) => {
+		t.is(value, JSON.stringify(object));
+	});
 });
 
-test("set() store JSON for array", async (t) => {
+test("set() store JSON for array", (t) => {
 	let object = [ "test", 34 ];
-	await etcd.set(t.context.rkey, object);
-	let value = await etcd.get(t.context.rkey);
-	t.is(value, JSON.stringify(object));
+	return etcd.set(t.context.rkey, object).then(() => {
+		return etcd.get(t.context.rkey);
+	}).then((value) => {
+		t.is(value, JSON.stringify(object));
+	});
 });
 
-test("get() return null for unset key", async (t) => {
-	t.is(await etcd.get(t.context.rkey), null);
+test("get() return null for unset key", (t) => {
+	return etcd.get(t.context.rkey).then((value) => {
+		t.is(value, null);
+	});
 });
 
-test("range() return {} for unset keys", async (t) => {
-	let value = await etcd.range(t.context.rkey + "_1", t.context.rkey + "_9");
-	t.deepEqual(value, {});
+test("range() return {} for unset keys", (t) => {
+	return etcd.range(t.context.rkey + "_1", t.context.rkey + "_9").then((value) => {
+		t.deepEqual(value, {});
+	});
 });
 
-test("range() returns keys", async (t) => {
+test("range() returns keys", (t) => {
 	const keys = {
 		[t.context.rkey + "_1"]: "value 1",
 		[t.context.rkey + "_3"]: "value 2",
@@ -74,9 +91,9 @@ test("range() returns keys", async (t) => {
 		[t.context.rkey + "_8"]: "value 5",
 	};
 	for (let kv in keys) {
-		await etcd.set(kv, keys[kv]);
+		etcd.setSync(kv, keys[kv]);
 	}
-	let value = await etcd.range(t.context.rkey + "_1", t.context.rkey + "_9");
+	let value = etcd.rangeSync(t.context.rkey + "_1", t.context.rkey + "_9");
 	t.deepEqual(value, keys);
 });
 
