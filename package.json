@@ -25,6 +25,7 @@
     "tsc:w": "tsc -w",
     "test": "ava",
     "test:w": "ava -w",
+    "test:junit": "ava -t | tap-xunit",
     "typings": "typings",
     "typedoc": "typedoc --excludeNotExported --mode modules --out docs index.ts"
   },
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "ava": "^0.16.0",
+    "tap-xunit": "^1.4.0",
     "typedoc": "github:datenmetzgerx/typedoc#typescript-2-build",
     "typescript": "^2.0.3",
     "typings": "^1.4.0"
