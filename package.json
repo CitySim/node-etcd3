@@ -1,6 +1,6 @@
 {
   "name": "node-etcd3",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "node client for etcd (api v3)",
   "main": "index.js",
   "author": "Sven Tatter",
