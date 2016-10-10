@@ -4,7 +4,7 @@ import { Etcd } from "..";
 test.beforeEach((t: any) => {
 	t.context.rkey = "test_kv_" + Math.random();
 	t.context.etcd = new Etcd();
-	t.context.etcd.deleteSync(t.context.rkey, "\0");
+	t.context.etcd.deleteSync(t.context.rkey, t.context.rkey + "_999");
 });
 
 test.afterEach((t: any) => {
