@@ -30,11 +30,12 @@
   },
   "dependencies": {
     "deasync-promise": "^1.0.1",
-    "grpc": "^1.0.0"
+    "grpc": "^1.0.0",
+    "lodash.assignin": "^4.2.0"
   },
   "devDependencies": {
     "ava": "^0.16.0",
-    "typedoc": "^0.4.5",
+    "typedoc": "github:datenmetzgerx/typedoc#typescript-2-build",
     "typescript": "^2.0.3",
     "typings": "^1.4.0"
   }

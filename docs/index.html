@@ -81,12 +81,6 @@ etcd.get(<span class="hljs-string">"testKey"</span>).then(<span class="hljs-func
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"unset =&gt;"</span>, etcd.getSync(<span class="hljs-string">"unset"</span>)) <span class="hljs-comment">// unset =&gt; null</span>
 })
 </code></pre>
-				<h1 id="generate-static-proto-files">generate static proto files</h1>
-				<ul>
-					<li>get protoc from <a href="https://github.com/google/protobuf/releases/tag/v3.1.0">here</a></li>
-				</ul>
-				<pre><code>protoc --js_out=import_style=commonjs,binary:. rpc<span class="hljs-selector-class">.proto</span> kv<span class="hljs-selector-class">.proto</span> auth.proto
-</code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">

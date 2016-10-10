@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>EtcdOptions | node-etcd3</title>
+	<title>EtcdKV | node-etcd3</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -58,10 +58,10 @@
 					<a href="../modules/_index_.html">&quot;index&quot;</a>
 				</li>
 				<li>
-					<a href="_index_.etcdoptions.html">EtcdOptions</a>
+					<a href="_index_.etcdkv.html">EtcdKV</a>
 				</li>
 			</ul>
-			<h1>Interface EtcdOptions</h1>
+			<h1>Interface EtcdKV</h1>
 		</div>
 	</div>
 </header>
@@ -72,7 +72,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">EtcdOptions</span>
+						<span class="target">EtcdKV</span>
 					</li>
 				</ul>
 			</section>
@@ -83,8 +83,12 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.etcdoptions.html#appleasekeepalive" class="tsd-kind-icon">app<wbr>Lease<wbr>Keep<wbr>Alive</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.etcdoptions.html#appleasettl" class="tsd-kind-icon">app<wbr>Lease<wbr>Ttl</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.etcdkv.html#create_revision" class="tsd-kind-icon">create_<wbr>revision</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.etcdkv.html#key" class="tsd-kind-icon">key</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.etcdkv.html#lease" class="tsd-kind-icon">lease</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.etcdkv.html#mod_revision" class="tsd-kind-icon">mod_<wbr>revision</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.etcdkv.html#value" class="tsd-kind-icon">value</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.etcdkv.html#version" class="tsd-kind-icon">version</a></li>
 							</ul>
 						</section>
 					</div>
@@ -93,32 +97,96 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="appleasekeepalive" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> app<wbr>Lease<wbr>Keep<wbr>Alive</h3>
-					<div class="tsd-signature tsd-kind-icon">app<wbr>Lease<wbr>Keep<wbr>Alive<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="create_revision" class="tsd-anchor"></a>
+					<h3>create_<wbr>revision</h3>
+					<div class="tsd-signature tsd-kind-icon">create_<wbr>revision<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/CitySim/node-etcd3/blob/bec1b7e/index.ts#L45">index.ts:45</a></li>
+							<li>Defined in <a href="https://github.com/CitySim/node-etcd3/blob/bec1b7e/index.ts#L22">index.ts:22</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Internal in which to keep alive the lease. milleseconds</p>
+							<p>create_revision is the revision of last creation on this key.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="appleasettl" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> app<wbr>Lease<wbr>Ttl</h3>
-					<div class="tsd-signature tsd-kind-icon">app<wbr>Lease<wbr>Ttl<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="key" class="tsd-anchor"></a>
+					<h3>key</h3>
+					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Buffer</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/CitySim/node-etcd3/blob/bec1b7e/index.ts#L43">index.ts:43</a></li>
+							<li>Defined in <a href="https://github.com/CitySim/node-etcd3/blob/bec1b7e/index.ts#L20">index.ts:20</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>TTL of the managed client lease. seconds</p>
+							<p>key is the key in bytes. An empty key is not allowed.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="lease" class="tsd-anchor"></a>
+					<h3>lease</h3>
+					<div class="tsd-signature tsd-kind-icon">lease<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/CitySim/node-etcd3/blob/bec1b7e/index.ts#L38">index.ts:38</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>lease is the ID of the lease that attached to key.
+								When the attached lease expires, the key will be deleted.
+							If lease is 0, then no lease is attached to the key.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="mod_revision" class="tsd-anchor"></a>
+					<h3>mod_<wbr>revision</h3>
+					<div class="tsd-signature tsd-kind-icon">mod_<wbr>revision<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/CitySim/node-etcd3/blob/bec1b7e/index.ts#L24">index.ts:24</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>mod_revision is the revision of last modification on this key.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="value" class="tsd-anchor"></a>
+					<h3>value</h3>
+					<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Buffer</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/CitySim/node-etcd3/blob/bec1b7e/index.ts#L32">index.ts:32</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>value is the value held by the key, in bytes.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="version" class="tsd-anchor"></a>
+					<h3>version</h3>
+					<div class="tsd-signature tsd-kind-icon">version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/CitySim/node-etcd3/blob/bec1b7e/index.ts#L30">index.ts:30</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>version is the version of the key. A deletion resets
+								the version to zero and any modification of the key
+							increases its version.</p>
 						</div>
 					</div>
 				</section>
@@ -140,24 +208,36 @@
 					<li class=" tsd-kind-class tsd-parent-kind-external-module">
 						<a href="../classes/_index_.etcd.html" class="tsd-kind-icon">Etcd</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_index_.etcdkv.html" class="tsd-kind-icon">EtcdKV</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_index_.etcdoptions.html" class="tsd-kind-icon">Etcd<wbr>Options</a>
+						<a href="_index_.etcdkv.html" class="tsd-kind-icon">EtcdKV</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_index_.etcdoptions.html#appleasekeepalive" class="tsd-kind-icon">app<wbr>Lease<wbr>Keep<wbr>Alive</a>
+								<a href="_index_.etcdkv.html#create_revision" class="tsd-kind-icon">create_<wbr>revision</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_index_.etcdoptions.html#appleasettl" class="tsd-kind-icon">app<wbr>Lease<wbr>Ttl</a>
+								<a href="_index_.etcdkv.html#key" class="tsd-kind-icon">key</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_index_.etcdkv.html#lease" class="tsd-kind-icon">lease</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_index_.etcdkv.html#mod_revision" class="tsd-kind-icon">mod_<wbr>revision</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_index_.etcdkv.html#value" class="tsd-kind-icon">value</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_index_.etcdkv.html#version" class="tsd-kind-icon">version</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_index_.etcdoptions.html" class="tsd-kind-icon">Etcd<wbr>Options</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
