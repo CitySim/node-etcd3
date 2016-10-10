@@ -58,6 +58,7 @@ export class Etcd {
 
 	clientLease: string;
 	clientLeasePromise: Promise<string>;
+	clientLeaseInterval: number;
 
 	constructor(servers: string[] = [ "localhost:2379" ], options: EtcdOptions = {}) {
 		this.options = extend(Etcd.defaults, options);
@@ -107,7 +108,7 @@ export class Etcd {
 
 		return this.clientLeasePromise = this.leaseGrant(this.options.appLeaseTtl).then((lease) => {
 			this.clientLease = lease;
-			this.leaseKeepAlive(lease, this.options.appLeaseKeepAlive);
+			this.clientLeaseInterval = this.leaseKeepAlive(lease, this.options.appLeaseKeepAlive);
 			return lease;
 		});
 	}

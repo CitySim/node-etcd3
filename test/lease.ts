@@ -17,6 +17,11 @@ test.beforeEach("create a random key", (t: any) => {
 	t.context.rkey = "test_lease" + keyCounter++;
 });
 
+test.afterEach((t: any) => {
+	const etcd = t.context.etcd as Etcd;
+	clearInterval(etcd.clientLeaseInterval);
+});
+
 test("leaseGrant() return a lease id", (t) => {
 	const etcd = t.context.etcd as Etcd;
 	return etcd.leaseGrant().then((lease) => {
