@@ -1,25 +1,15 @@
 import test from "ava";
 import { Etcd } from "..";
 
-test.before("clean etcd", (t) => {
-	const etcd = new Etcd();
-	let deletedKeys = etcd.deleteSync("test_lease", "\0");
-	console.log(`cleaned ${deletedKeys} keys from etcd`);
-});
-
-test.beforeEach("create etcd", (t: any) => {
+test.beforeEach((t: any) => {
+	t.context.rkey = "test_kv_" + Math.random();
 	t.context.etcd = new Etcd();
-});
-
-let keyCounter = 0;
-test.beforeEach("create a random key", (t: any) => {
-	// for some reason the `t` isn't set to have a `context` in `beforeEach`
-	t.context.rkey = "test_lease" + keyCounter++;
+	t.context.etcd.deleteSync(t.context.rkey, "\0");
 });
 
 test.afterEach((t: any) => {
 	const etcd = t.context.etcd as Etcd;
-	clearInterval(etcd.clientLeaseInterval);
+	etcd.close();
 });
 
 test("leaseGrant() return a lease id", (t) => {
@@ -38,17 +28,22 @@ test("leaseGrant() with TTL", (t) => {
 	});
 });
 
-test.cb("set() uses lease", (t) => {
+test("set() uses lease", (t) => {
 	const etcd = t.context.etcd as Etcd;
 	etcd.leaseGrant(5).then((lease) => {
 		etcd.setSync(t.context.rkey, "plop", lease);
 		let kv = etcd.getSync(t.context.rkey, "raw");
 		t.is(kv.value.toString(), "plop");
 		t.is(kv.lease, lease);
-		setTimeout(() => {
-			t.is(etcd.getSync(t.context.rkey), null);
-			t.end();
-		}, 6000);
+	});
+});
+
+test("set() with TTL", (t) => {
+	const etcd = t.context.etcd as Etcd;
+	etcd.set(t.context.rkey, "plop", 50).then((lease) => {
+		let kv = etcd.getSync(t.context.rkey, "raw");
+		t.is(kv.value.toString(), "plop");
+		t.is(kv.lease, lease);
 	});
 });
 

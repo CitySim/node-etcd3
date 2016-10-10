@@ -1,31 +1,22 @@
 import test from "ava";
 import { Etcd } from "..";
 
-test.before("clean etcd", (t) => {
-	const etcd = new Etcd();
-	let deletedKeys = etcd.deleteSync("test_kv", "\0");
-	console.log(`cleaned ${deletedKeys} keys from etcd`);
-});
-
-test.beforeEach("create etcd", (t: any) => {
-	t.context.etcd = new Etcd();
-});
-
 let keyCounter = 0;
-test.beforeEach("create a random key", (t: any) => {
-	// for some reason the `t` isn't set to have a `context` in `beforeEach`
-	t.context.rkey = "test_kv" + keyCounter++;
+test.beforeEach((t: any) => {
+	t.context.rkey = "test_kv_" + Math.random();
+	t.context.etcd = new Etcd();
+	t.context.etcd.deleteSync(t.context.rkey, "\0");
 });
 
 test.afterEach((t: any) => {
 	const etcd = t.context.etcd as Etcd;
-	clearInterval(etcd.clientLeaseInterval);
+	etcd.close();
 });
 
-test("set() return true", (t) => {
+test("set() return null", (t) => {
 	const etcd = t.context.etcd as Etcd;
 	return etcd.set(t.context.rkey, 34).then((result) => {
-		t.true(result);
+		t.true(result == null);
 	});
 });
 
@@ -118,7 +109,7 @@ test("range() returns keys", (t) => {
 test("setSync()", (t) => {
 	const etcd = t.context.etcd as Etcd;
 	let result = etcd.setSync(t.context.rkey, 34);
-	t.true(result);
+	t.true(result == null);
 });
 
 test("getSync()", (t) => {
