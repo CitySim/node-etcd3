@@ -9,6 +9,9 @@ import { EtcdOptions } from "./etcdoptions";
 
 const etcdProto = grpc.load(__dirname + "/../protos/rpc.proto");
 
+/**
+ * etcd client using the grpc protocol of etcd version 3 and later.
+ */
 export class Etcd {
 	static defaults: EtcdOptions = {
 		appLeaseTtl: 10,
@@ -24,8 +27,17 @@ export class Etcd {
 	clientLeasePromise: Promise<string>;
 	clientLeaseToken: KeepAliveToken;
 
+	/** KeepAliveToken's created by this client */
 	keepAlives: KeepAliveToken[] = [];
 
+	/**
+	 * Creates a new etcd client.
+	 * @param servers
+	 * array of etcd hosts to use
+	 *
+	 * **Note**: currently only the first server is used, this will be fixed before version 1
+	 * @param options - additional options, see {@link defaults} for actual defaults
+	 */
 	constructor(servers: string[] = [ "localhost:2379" ], options: EtcdOptions = {}) {
 		this.options = extend(Etcd.defaults, options);
 
@@ -107,24 +119,30 @@ export class Etcd {
 	getSync(key: string, returnType: "value" | "json" | "buffer" | "raw"): any {
 		return deasyncPromise(this.get(key, returnType as any));
 	}
-	/**
-	 * get a key from etcd
-	 * @param key - key to get
-	 * @return value of the key
-	 */
 	get(key: string, returnType?: "value"): Promise<string>;
 	get(key: string, returnType: "json"): Promise<any>;
 	get(key: string, returnType: "buffer"): Promise<Buffer>;
 	get(key: string, returnType: "raw"): Promise<EtcdKV>;
+	/**
+	 * get the value of a key from etcd
+	 * @param key - key to get
+	 * @param returnType
+	 * * `value` (default) - return the as a `string`
+	 * * `json` - parse as JSON and return the result
+	 * * `buffer` - return a NodeJS Buffer
+	 * * `raw` - return the value as it came from etcd
+	 * @return value of the key as defined by `returnType`
+	 */
 	get(key: string, returnType: "value" | "json" | "buffer" | "raw" = "value"): Promise<any> {
 		return this.callClient("KV", "range", {
 			key: new Buffer(key)
 		}).then((res) => {
 			if (res.kvs.length) {
 				switch (returnType) {
+					default:
+					case "value": return res.kvs[0].value.toString();
 					case "raw": return res.kvs[0];
 					case "buffer": return res.kvs[0].value;
-					case "value": return res.kvs[0].value.toString();
 					case "json": return JSON.parse(res.kvs[0].value.toString());
 				}
 			} else {
@@ -143,9 +161,14 @@ export class Etcd {
 	}
 	/**
 	 * get a range of key from etcd
-	 * @param fromKey - key to start from
-	 * @param toKey - key to end on
-	 * @return value of the key
+	 * @param fromKey - key to start from (inclusive)
+	 * @param toKey - key to end on (exclusive)
+	 * @param returnType
+	 * * `value` (default) - return the as a `string`
+	 * * `json` - parse as JSON and return the result
+	 * * `buffer` - return a NodeJS Buffer
+	 * * `raw` - return the value as it came from etcd
+	 * @return object with a key for each key returned, value of the key as defined by `returnType`
 	 */
 	range(fromKey: string, toKey: string, returnType: "value" | "json" | "buffer" | "raw" = "value"): Promise<any> {
 		return this.callClient("KV", "range", {
@@ -157,9 +180,10 @@ export class Etcd {
 			for (let kv of res.kvs as EtcdKV[]) {
 				let key = kv.key.toString();
 				switch (returnType) {
+					default:
+					case "value": result[key] = kv.value.toString(); break;
 					case "raw": result[key] = kv; break;
 					case "buffer": result[key] = kv.value; break;
-					case "value": result[key] = kv.value.toString(); break;
 					case "json": result[key] = JSON.parse(kv.value.toString()); break;
 				}
 			}
@@ -180,7 +204,7 @@ export class Etcd {
 	 * * `null` is saved as an empty string
 	 * * `undefined` is saved as an empty string
 	 * * strings are saved as-is
-	 * * everthing else is tried to `JSON.stringify(value)`
+	 * * everything else is tried to `JSON.stringify(value)`
 	 *
 	 * if you set "lease" to "client" a lease uniq to the instance of the Client will be used. This lease
 	 * will be created automatic and will be kept alive automatic.
@@ -220,7 +244,8 @@ export class Etcd {
 	}
 	/**
 	 * delete a key from etcd.
-	 * @param key - etcd key to delete
+	 * @param key - key to start from (inclusive)
+	 * @param keyTo - key to end on (exclusive)
 	 * @return number of keys deleted
 	 */
 	delete(key: string, keyTo?: string): Promise<number> {
@@ -241,7 +266,7 @@ export class Etcd {
 	}
 	/**
 	 * request a new lease from etcd
-	 * @param ttl - requested ttl of the lease
+	 * @param ttl - requested TTL of the lease
 	 * @return
 	 */
 	leaseGrant(ttl?: number): Promise<string> {
@@ -256,7 +281,7 @@ export class Etcd {
 	 * keep a lease alive
 	 * @param lease - lease to keep alive
 	 * @param interval - interval in which to send keep alives
-	 * @return id of interval used
+	 * @return `KeepAliveToken` that was created
 	 */
 	leaseKeepAlive(lease: string, interval: number = 1000): KeepAliveToken {
 		let handler = this.callClientStream("Lease", "leaseKeepAlive");

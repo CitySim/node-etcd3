@@ -1,5 +1,5 @@
 import test from "ava";
-import { Etcd } from "..";
+import { Etcd, EtcdKV } from "..";
 
 let keyCounter = 0;
 test.beforeEach((t: any) => {
@@ -80,6 +80,56 @@ test("get() return null for unset key", (t) => {
 	const etcd = t.context.etcd as Etcd;
 	return etcd.get(t.context.rkey).then((value) => {
 		t.is(value, null);
+	});
+});
+
+test("get() no returnType returns a string", (t) => {
+	const etcd = t.context.etcd as Etcd;
+	return etcd.set(t.context.rkey, { "test": 34 }).then(() => {
+		return etcd.get(t.context.rkey);
+	}).then((value) => {
+		t.is(typeof value, "string");
+	});
+});
+
+test("get() returnType value returns a string", (t) => {
+	const etcd = t.context.etcd as Etcd;
+	return etcd.set(t.context.rkey, { "test": 34 }).then(() => {
+		return etcd.get(t.context.rkey, "value");
+	}).then((value) => {
+		t.is(typeof value, "string");
+	});
+});
+
+test("get() returnType json returns a object", (t) => {
+	const etcd = t.context.etcd as Etcd;
+	return etcd.set(t.context.rkey, { "test": 34 }).then(() => {
+		return etcd.get(t.context.rkey, "json");
+	}).then((value) => {
+		t.deepEqual(value, { "test": 34 });
+	});
+});
+
+test("get() returnType buffer returns a Buffer", (t) => {
+	const etcd = t.context.etcd as Etcd;
+	return etcd.set(t.context.rkey, { "test": 34 }).then(() => {
+		return etcd.get(t.context.rkey, "buffer");
+	}).then((value) => {
+		t.true(Buffer.isBuffer(value));
+	});
+});
+
+test("get() returnType raw returns a object", (t) => {
+	const etcd = t.context.etcd as Etcd;
+	return etcd.set(t.context.rkey, { "test": 34 }).then(() => {
+		return etcd.get(t.context.rkey, "raw");
+	}).then((value) => {
+		t.true(value.key != null);
+		t.true(value.create_revision != null);
+		t.true(value.mod_revision != null);
+		t.true(value.version != null);
+		t.true(value.value != null);
+		t.true(value.lease != null);
 	});
 });
 
