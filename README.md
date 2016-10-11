@@ -7,7 +7,7 @@ a node client for the new [etcd](https://github.com/coreos/etcd/) v3 grpc API
 
 **WIP: this client is work in Progress. Braking changes are avoided if possible, but may happen until the first stable version is reached**
 
-* supports node 4, 5 and 6
+* supports node 0.12, 4-6
 * easy to use
 * Promise based
 * offers sync methods
