@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;index&quot; | node-etcd3</title>
+	<title>EtcdOptions | node-etcd3</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,33 +55,68 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_index_.html">&quot;index&quot;</a>
+					<a href="etcdoptions.html">EtcdOptions</a>
 				</li>
 			</ul>
-			<h1>External module &quot;index&quot;</h1>
+			<h1>Interface EtcdOptions</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">EtcdOptions</span>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Classes</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="../classes/_index_.etcd.html" class="tsd-kind-icon">Etcd</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="etcdoptions.html#appleasekeepalive" class="tsd-kind-icon">app<wbr>Lease<wbr>Keep<wbr>Alive</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="etcdoptions.html#appleasettl" class="tsd-kind-icon">app<wbr>Lease<wbr>Ttl</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section ">
-							<h3>Interfaces</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_index_.etcdkv.html" class="tsd-kind-icon">EtcdKV</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_index_.etcdoptions.html" class="tsd-kind-icon">Etcd<wbr>Options</a></li>
-							</ul>
-						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="appleasekeepalive" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> app<wbr>Lease<wbr>Keep<wbr>Alive</h3>
+					<div class="tsd-signature tsd-kind-icon">app<wbr>Lease<wbr>Keep<wbr>Alive<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/CitySim/node-etcd3/blob/847e962/lib/etcdoptions.ts#L5">lib/etcdoptions.ts:5</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Internal in which to keep alive the lease. millisecond&#39;s</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="appleasettl" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> app<wbr>Lease<wbr>Ttl</h3>
+					<div class="tsd-signature tsd-kind-icon">app<wbr>Lease<wbr>Ttl<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/CitySim/node-etcd3/blob/847e962/lib/etcdoptions.ts#L3">lib/etcdoptions.ts:3</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>TTL of the managed client lease. seconds</p>
+						</div>
 					</div>
 				</section>
 			</section>
@@ -92,22 +127,37 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class="current tsd-kind-external-module">
-						<a href="_index_.html">"index"</a>
-					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/_index_.etcd.html" class="tsd-kind-icon">Etcd</a>
+					<li class=" tsd-kind-class">
+						<a href="../classes/etcd.html" class="tsd-kind-icon">Etcd</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_index_.etcdkv.html" class="tsd-kind-icon">EtcdKV</a>
+					<li class=" tsd-kind-class">
+						<a href="../classes/etcderror.html" class="tsd-kind-icon">Etcd<wbr>Error</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_index_.etcdoptions.html" class="tsd-kind-icon">Etcd<wbr>Options</a>
+					<li class=" tsd-kind-class">
+						<a href="../classes/keepalivetoken.html" class="tsd-kind-icon">Keep<wbr>Alive<wbr>Token</a>
 					</li>
+					<li class=" tsd-kind-interface">
+						<a href="etcdkv.html" class="tsd-kind-icon">EtcdKV</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
+						<a href="etcdoptions.html" class="tsd-kind-icon">Etcd<wbr>Options</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="etcdoptions.html#appleasekeepalive" class="tsd-kind-icon">app<wbr>Lease<wbr>Keep<wbr>Alive</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="etcdoptions.html#appleasettl" class="tsd-kind-icon">app<wbr>Lease<wbr>Ttl</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
 				</ul>
 			</nav>
 		</div>

@@ -27,7 +27,7 @@
     "test:w": "ava -w",
     "test:junit": "ava -t | tap-xunit",
     "typings": "typings",
-    "typedoc": "typedoc --excludeNotExported --mode modules --out docs index.ts"
+    "typedoc": "typedoc --excludeNotExported --mode file --out docs --tsconfig tsconfig.json typings/index.d.ts index.ts lib"
   },
   "dependencies": {
     "deasync-promise": "^1.0.1",

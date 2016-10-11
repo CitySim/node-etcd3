@@ -64,14 +64,21 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<h1 id="node-etcd3">node-etcd3</h1>
-				<p><a href="https://travis-ci.org/CitySim/node-etcd3"><img src="https://travis-ci.org/CitySim/node-etcd3.svg?branch=master" alt="travis"></a></p>
+				<p><a href="https://travis-ci.org/CitySim/node-etcd3"><img src="https://travis-ci.org/CitySim/node-etcd3.svg?branch=master" alt="Build Status"></a>
+				<a href="https://circleci.com/gh/CitySim/node-etcd3/tree/master"><img src="https://circleci.com/gh/CitySim/node-etcd3/tree/master.svg?style=svg" alt="CircleCI"></a></p>
 				<p>a node client for the new <a href="https://github.com/coreos/etcd/">etcd</a> v3 grpc API</p>
+				<p><strong>WIP: this client is work in Progress. Braking changes are avoided if possible, but may happen until the first stable version is reached</strong></p>
 				<ul>
-					<li>supports node 4, 5 and 6</li>
+					<li>supports node 0.12, 4-6</li>
 					<li>easy to use</li>
-					<li>Docs: [<a href="https://citysim.github.io/node-etcd3/classes/_index_.etcd.html">https://citysim.github.io/node-etcd3/classes/_index_.etcd.html</a>]</li>
+					<li>Promise based</li>
+					<li>offers sync methods</li>
+					<li>Docs: <a href="https://citysim.github.io/node-etcd3">go here</a><ul>
+							<li>may be broken/outdated until typedoc can handle typescript v2 (currently update v0.4.1, yay)</li>
+						</ul>
+					</li>
+					<li>Changelog: <a href="https://github.com/CitySim/node-etcd3/blob/master/CHANGELOG.md">go here</a></li>
 				</ul>
-				<h2 id="example">Example</h2>
 				<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> { Etcd } = <span class="hljs-built_in">require</span>(<span class="hljs-string">"node-etcd3"</span>);
 <span class="hljs-keyword">const</span> etcd = <span class="hljs-keyword">new</span> Etcd();
 
@@ -81,6 +88,88 @@ etcd.get(<span class="hljs-string">"testKey"</span>).then(<span class="hljs-func
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"unset =&gt;"</span>, etcd.getSync(<span class="hljs-string">"unset"</span>)) <span class="hljs-comment">// unset =&gt; null</span>
 })
 </code></pre>
+				<h2 id="roadmap">Roadmap</h2>
+				<p><strong>working:</strong></p>
+				<ul>
+					<li>KV - get</li>
+					<li>KV - range</li>
+					<li>KV - set</li>
+					<li>KV - delete</li>
+					<li>Lease - grant</li>
+					<li>Lease - keep alive</li>
+				</ul>
+				<p><strong>todo for v1:</strong></p>
+				<ul>
+					<li>Lease - revoke</li>
+					<li>watch - watch</li>
+					<li>KV - compact</li>
+				</ul>
+				<p><strong>todo for later:</strong></p>
+				<ul>
+					<li>KV - txn</li>
+					<li>cluster</li>
+					<li>maintenance</li>
+					<li>auth</li>
+				</ul>
+				<h2 id="intro-examples">Intro &amp; Examples</h2>
+				<ul>
+					<li>all methods return a <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></li>
+					<li>most methods also come in a sync-flavor, like <code>getSync</code> for <code>get</code><ul>
+							<li>these are handy for setting up things on application start</li>
+						</ul>
+					</li>
+				</ul>
+				<h3 id="get-and-set-with-promises">get() and set() with Promises</h3>
+				<pre><code class="lang-javascript">etcd.get(<span class="hljs-string">"env"</span>).then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">env</span>) </span>{
+    <span class="hljs-keyword">return</span> etcd.set(env + <span class="hljs-string">"/testKey"</span>, <span class="hljs-number">34</span>)
+}).then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"set testKey for env!"</span>)
+}).catch(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>{
+    <span class="hljs-built_in">console</span>.error(<span class="hljs-string">"error"</span>, err);
+})
+</code></pre>
+				<h3 id="getsync-">getSync()</h3>
+				<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> mainDB = <span class="hljs-keyword">new</span> DB({
+    <span class="hljs-attr">server</span>: etcd.getSync(<span class="hljs-string">"db/main/server"</span>),
+    <span class="hljs-attr">user</span>: etcd.getSync(<span class="hljs-string">"db/main/user"</span>),
+    <span class="hljs-attr">password</span>: etcd.getSync(<span class="hljs-string">"db/main/password"</span>)
+});
+</code></pre>
+				<h3 id="how-to-store-a-object-buffer-number-">how to store a Object, Buffer, number, ... ?</h3>
+				<p>etcd stores binary data (actually even the keys a buffers). But for ease of use node-etcd3 works with string most of the time. But you can still
+				easily store a Buffer to etcd, just pass it into <code>set()</code>.</p>
+				<ul>
+					<li>a NodeJS <code>Buffer</code> will be stored it as-is.</li>
+					<li><code>string</code>s also get stored as-is.</li>
+					<li><code>number</code>s will be stored as string.</li>
+					<li>any other object is put in <code>JSON.stringify</code> and stored as string</li>
+				</ul>
+				<p>see below to see how to get a Buffer (or ...) out again</p>
+				<h3 id="get-range-return-type">get &amp; range return type</h3>
+				<ul>
+					<li>get offers multiple ways to return the data<ul>
+							<li><code>value</code> (default): returns a string</li>
+							<li><code>json</code>: parses the value and return the parsed object</li>
+							<li><code>buffer</code>: returns a NodeJS <code>Buffer</code> containing the value</li>
+							<li><code>raw</code>: an object containing detailed information, such as the <code>version</code> or <code>lease</code></li>
+						</ul>
+					</li>
+					<li>they work for <code>get()</code> and <code>range()</code></li>
+				</ul>
+				<pre><code class="lang-javascript">etcd.get(<span class="hljs-string">"app/logo.png"</span>, <span class="hljs-string">"buffer"</span>);
+etcd.get(<span class="hljs-string">"app/config"</span>, <span class="hljs-string">"json"</span>);
+</code></pre>
+				<h3 id="leases">leases</h3>
+				<ul>
+					<li>leases are basically etcd3 way of doing TTL for keys, but they work great for multiple keys at once</li>
+					<li>node-etcd3 has 3 main ways for working with leases<ul>
+							<li><strong>use the client lease</strong><br>the client has one managed lease, use <code>&quot;client&quot;</code> as lease ID then calling <code>set()</code>. It is kept alive automatically and you don&#39;t have a hand
+							around the lease ID yourself.<br><code>etcd.set(&quot;my/key&quot;, &quot;hello leases!&quot;, &quot;client&quot;)</code></li>
+							<li><strong>use leases</strong><br>you can also get your own lease using the <code>leaseGrant()</code> method.<br><code>let myVeryOwnLease = etcd.leaseGrant()</code></li>
+							<li><strong>simply set a TTL</strong><br>you can pass in a number as lease to create a new lease with the TTL and use it for the key.<br><code>etcd.set(&quot;ttl/key&quot;, &quot;expire after 100s&quot;, 100);</code></li>
+						</ul>
+					</li>
+				</ul>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -89,13 +178,25 @@ etcd.get(<span class="hljs-string">"testKey"</span>).then(<span class="hljs-func
 					<li class="globals  ">
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_index_.html">"index"</a>
-					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="classes/etcd.html" class="tsd-kind-icon">Etcd</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/etcderror.html" class="tsd-kind-icon">Etcd<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/keepalivetoken.html" class="tsd-kind-icon">Keep<wbr>Alive<wbr>Token</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/etcdkv.html" class="tsd-kind-icon">EtcdKV</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/etcdoptions.html" class="tsd-kind-icon">Etcd<wbr>Options</a>
+					</li>
 				</ul>
 			</nav>
 		</div>

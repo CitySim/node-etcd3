@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>EtcdKV | node-etcd3</title>
+	<title>EtcdError | node-etcd3</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,13 +55,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_index_.html">&quot;index&quot;</a>
-				</li>
-				<li>
-					<a href="_index_.etcdkv.html">EtcdKV</a>
+					<a href="etcderror.html">EtcdError</a>
 				</li>
 			</ul>
-			<h1>Interface EtcdKV</h1>
+			<h1>Class EtcdError</h1>
 		</div>
 	</div>
 </header>
@@ -72,7 +69,12 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">EtcdKV</span>
+						<span class="tsd-signature-type">Error</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">EtcdError</span>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -81,114 +83,109 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="etcderror.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.etcdkv.html#create_revision" class="tsd-kind-icon">create_<wbr>revision</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.etcdkv.html#key" class="tsd-kind-icon">key</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.etcdkv.html#lease" class="tsd-kind-icon">lease</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.etcdkv.html#mod_revision" class="tsd-kind-icon">mod_<wbr>revision</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.etcdkv.html#value" class="tsd-kind-icon">value</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.etcdkv.html#version" class="tsd-kind-icon">version</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="etcderror.html#internal" class="tsd-kind-icon">internal</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="etcderror.html#error" class="tsd-kind-icon">Error</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-static"><a href="etcderror.html#message" class="tsd-kind-icon">message</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="etcderror.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-static"><a href="etcderror.html#stack" class="tsd-kind-icon">stack</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Etcd<wbr>Error<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, internal<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="etcderror.html" class="tsd-signature-type">EtcdError</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/CitySim/node-etcd3/blob/847e962/lib/etcderror.ts#L2">lib/etcderror.ts:2</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>message: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>internal: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="etcderror.html" class="tsd-signature-type">EtcdError</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="create_revision" class="tsd-anchor"></a>
-					<h3>create_<wbr>revision</h3>
-					<div class="tsd-signature tsd-kind-icon">create_<wbr>revision<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="internal" class="tsd-anchor"></a>
+					<h3>internal</h3>
+					<div class="tsd-signature tsd-kind-icon">internal<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/CitySim/node-etcd3/blob/bec1b7e/index.ts#L22">index.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/CitySim/node-etcd3/blob/847e962/lib/etcderror.ts#L2">lib/etcderror.ts:2</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>create_revision is the revision of last creation on this key.</p>
-						</div>
-					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="key" class="tsd-anchor"></a>
-					<h3>key</h3>
-					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Buffer</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="error" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> Error</h3>
+					<div class="tsd-signature tsd-kind-icon">Error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ErrorConstructor</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/CitySim/node-etcd3/blob/bec1b7e/index.ts#L20">index.ts:20</a></li>
+							<li>Defined in node_modules/typedoc/node_modules/typescript/lib/lib.d.ts:904</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>key is the key in bytes. An empty key is not allowed.</p>
-						</div>
-					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="lease" class="tsd-anchor"></a>
-					<h3>lease</h3>
-					<div class="tsd-signature tsd-kind-icon">lease<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-static">
+					<a name="message" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> message</h3>
+					<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from Error.message</p>
+						<p>Overwrites NodeError.message</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/CitySim/node-etcd3/blob/bec1b7e/index.ts#L38">index.ts:38</a></li>
+							<li>Defined in node_modules/typedoc/node_modules/typescript/lib/lib.d.ts:894</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>lease is the ID of the lease that attached to key.
-								When the attached lease expires, the key will be deleted.
-							If lease is 0, then no lease is attached to the key.</p>
-						</div>
-					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="mod_revision" class="tsd-anchor"></a>
-					<h3>mod_<wbr>revision</h3>
-					<div class="tsd-signature tsd-kind-icon">mod_<wbr>revision<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
+					<a name="name" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> name</h3>
+					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from Error.name</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/CitySim/node-etcd3/blob/bec1b7e/index.ts#L24">index.ts:24</a></li>
+							<li>Defined in node_modules/typedoc/node_modules/typescript/lib/lib.d.ts:893</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>mod_revision is the revision of last modification on this key.</p>
-						</div>
-					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="value" class="tsd-anchor"></a>
-					<h3>value</h3>
-					<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Buffer</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-static">
+					<a name="stack" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagOptional">Optional</span> stack</h3>
+					<div class="tsd-signature tsd-kind-icon">stack<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from Error.stack</p>
+						<p>Overwrites NodeError.stack</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/CitySim/node-etcd3/blob/bec1b7e/index.ts#L32">index.ts:32</a></li>
+							<li>Defined in node_modules/typedoc/node_modules/typescript/lib/lib.d.ts:895</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>value is the value held by the key, in bytes.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="version" class="tsd-anchor"></a>
-					<h3>version</h3>
-					<div class="tsd-signature tsd-kind-icon">version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/CitySim/node-etcd3/blob/bec1b7e/index.ts#L30">index.ts:30</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>version is the version of the key. A deletion resets
-								the version to zero and any modification of the key
-							increases its version.</p>
-						</div>
-					</div>
 				</section>
 			</section>
 		</div>
@@ -198,45 +195,48 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class="current tsd-kind-external-module">
-						<a href="../modules/_index_.html">"index"</a>
-					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/_index_.etcd.html" class="tsd-kind-icon">Etcd</a>
+					<li class=" tsd-kind-class">
+						<a href="etcd.html" class="tsd-kind-icon">Etcd</a>
 					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_index_.etcdkv.html" class="tsd-kind-icon">EtcdKV</a>
+					<li class="current tsd-kind-class">
+						<a href="etcderror.html" class="tsd-kind-icon">Etcd<wbr>Error</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_index_.etcdkv.html#create_revision" class="tsd-kind-icon">create_<wbr>revision</a>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="etcderror.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_index_.etcdkv.html#key" class="tsd-kind-icon">key</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="etcderror.html#internal" class="tsd-kind-icon">internal</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_index_.etcdkv.html#lease" class="tsd-kind-icon">lease</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="etcderror.html#error" class="tsd-kind-icon">Error</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_index_.etcdkv.html#mod_revision" class="tsd-kind-icon">mod_<wbr>revision</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-static">
+								<a href="etcderror.html#message" class="tsd-kind-icon">message</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_index_.etcdkv.html#value" class="tsd-kind-icon">value</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
+								<a href="etcderror.html#name" class="tsd-kind-icon">name</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_index_.etcdkv.html#version" class="tsd-kind-icon">version</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-static">
+								<a href="etcderror.html#stack" class="tsd-kind-icon">stack</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_index_.etcdoptions.html" class="tsd-kind-icon">Etcd<wbr>Options</a>
+					<li class=" tsd-kind-class">
+						<a href="keepalivetoken.html" class="tsd-kind-icon">Keep<wbr>Alive<wbr>Token</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/etcdkv.html" class="tsd-kind-icon">EtcdKV</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/etcdoptions.html" class="tsd-kind-icon">Etcd<wbr>Options</a>
 					</li>
 				</ul>
 			</nav>
