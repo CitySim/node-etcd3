@@ -3,3 +3,4 @@ typings
 test
 index.ts
 lib/*.ts
+!lib/*.d.ts
