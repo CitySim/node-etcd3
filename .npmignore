@@ -1,4 +1,5 @@
 docs
 typings
 test
+index.ts
 lib/*.ts
