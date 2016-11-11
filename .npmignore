@@ -1,3 +1,4 @@
 docs
 typings
 test
+lib/*.ts
