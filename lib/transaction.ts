@@ -1,17 +1,6 @@
 const grpc = require("grpc");
 const etcdProto = grpc.load(__dirname + "/../protos/rpc.proto");
 
-export interface EtcdRequest {
-  key: Buffer;
-  value: Buffer;
-  lease?: Number;
-}
-
-export interface EtcdDeleteRangeRequest {
-  key: Buffer;
-  range_end?: Number;
-}
-
 export module CompareTypeDef
 {
     export enum CompareResult
@@ -28,6 +17,20 @@ export module CompareTypeDef
     }
 }
 
+export enum SortOrder {
+  NONE = 0, // default, no sorting
+  ASCEND = 1, // lowest target value first
+  DESCEND = 2, // highest target value first
+}
+
+export enum SortTarget {
+  KEY = 0,
+  VERSION = 1,
+  CREATE = 2,
+  MOD = 3,
+  VALUE = 4,
+}
+
 export class EtcdCompare {
   compare: any;
 
@@ -41,20 +44,19 @@ export class EtcdCompare {
     this.compare.result = operator;
     this.compare.target = targetType;
     this.compare.key = key;
-    this.compare.target_union = {};
 
     switch(targetType) {
       case CompareTypeDef.CompareTarget.CREATE:
-        this.compare.target_union.create_revision = compareTo;
+        this.compare.create_revision = compareTo;
         break;
       case CompareTypeDef.CompareTarget.VERSION:
-        this.compare.target_union.version = compareTo;
+        this.compare.version = compareTo;
         break;
       case CompareTypeDef.CompareTarget.MOD:
-        this.compare.target_union.mod_revision = compareTo;
+        this.compare.mod_revision = compareTo;
         break;
       case CompareTypeDef.CompareTarget.VALUE:
-        this.compare.target_union.value = compareTo;
+        this.compare.value = compareTo;
         break;
     }
   }
@@ -146,9 +148,12 @@ export class EtcdOpRequest {
 
 export class DeleteRangeRequest extends EtcdOpRequest {
   type = 'request_delete_range';
-  request: EtcdDeleteRangeRequest;
+  request: {
+    key: Buffer,
+    range_end?: Number,
+  };
 
-  constructor (request: EtcdDeleteRangeRequest) {
+  constructor (request) {
     super();
     this.request = new etcdProto.etcdserverpb.DeleteRangeRequest(request);
   }
@@ -156,19 +161,33 @@ export class DeleteRangeRequest extends EtcdOpRequest {
 
 export class RangeRequest extends EtcdOpRequest  {
   type = 'request_range';
-  request: any;
+  request: {
+    key: Buffer,
+    range_end?: any,
+    limit?: number,
+    revision?: number,
+    sort_order?: SortOrder,
+    sort_target?: SortTarget,
+    serializable?: boolean,
+    keys_only?: boolean,
+    count_only?: boolean,
+  };
 
   constructor (request: any) {
     super();
-    this.request = new etcdProto.etcdserverpb.RangeRequest(request);
+    this.request = request;
   }
 }
 
 export class PutRequest extends EtcdOpRequest  {
   type = 'request_put';
-  request: EtcdRequest;
+  request: {
+    key: Buffer,
+    value: Buffer,
+    lease?: Number,
+  };
 
-  constructor (request: EtcdRequest) {
+  constructor (request) {
     super();
     this.request = new etcdProto.etcdserverpb.PutRequest(request);
   }
