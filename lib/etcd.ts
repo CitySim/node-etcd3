@@ -47,6 +47,7 @@ export class Etcd {
 		this.clients = {
 			KV: new etcdProto.etcdserverpb.KV(this.servers[0], this.credentials),
 			Lease: new etcdProto.etcdserverpb.Lease(this.servers[0], this.credentials),
+			Watch: new etcdProto.etcdserverpb.Watch(this.servers[0], this.credentials),
 		};
 	}
 
