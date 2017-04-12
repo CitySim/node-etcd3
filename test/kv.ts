@@ -101,15 +101,6 @@ test("get() returnType value returns a string", (t) => {
 	});
 });
 
-test("get() returnType json returns a object", (t) => {
-	const etcd = t.context.etcd as Etcd;
-	return etcd.set(t.context.rkey, { "test": 34 }).then(() => {
-		return etcd.get(t.context.rkey, "json");
-	}).then((value) => {
-		t.deepEqual(value, { "test": 34 });
-	});
-});
-
 test("get() returnType buffer returns a Buffer", (t) => {
 	const etcd = t.context.etcd as Etcd;
 	return etcd.set(t.context.rkey, { "test": 34 }).then(() => {
