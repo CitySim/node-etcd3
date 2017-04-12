@@ -18,7 +18,7 @@ export class Lock {
   constructor (
     etcdClient: any,
     key: string,
-    ttl: number = 60,
+    ttl?: number,
     lease?: string
   ) {
     if (!etcdClient) {
@@ -27,7 +27,6 @@ export class Lock {
 
     this.etcdClient = etcdClient;
     this.key = key;
-    this.ttl = ttl;
     this.version = 0;
     this.uuid = uuid.v4();
   }
@@ -45,7 +44,9 @@ export class Lock {
 
     while (!success && attemps > 0) {
       attemps -= 1;
-      if (!this.lease) {
+      if (!this.lease && !this.ttl) {
+        this.lease = yield this.etcdClient.getClientLease();
+      } else if (!!this.ttl && !this.lease) {
         this.lease = yield this.etcdClient.leaseGrant(this.ttl);
       }
 
