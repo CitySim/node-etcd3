@@ -3,12 +3,12 @@ const extend = require("lodash.assignin");
 const deasyncPromise = require("deasync-promise");
 
 import { KeepAliveToken } from "./keepalivetoken";
+import { EtcdTransaction, EtcdCompare, EtcdOpRequest} from "./transaction";
 import { EtcdKV } from "./etcdkv";
 import { EtcdError } from "./etcderror";
 import { EtcdOptions } from "./etcdoptions";
 
 const etcdProto = grpc.load(__dirname + "/../protos/rpc.proto");
-
 /**
  * etcd client using the grpc protocol of etcd version 3 and later.
  */
@@ -44,10 +44,10 @@ export class Etcd {
 		this.servers = servers;
 		if (this.servers.length > 1)
 			console.warn("etcd3: currently only the first server address is used");
-
 		this.clients = {
 			KV: new etcdProto.etcdserverpb.KV(this.servers[0], this.credentials),
 			Lease: new etcdProto.etcdserverpb.Lease(this.servers[0], this.credentials),
+			Watch: new etcdProto.etcdserverpb.Watch(this.servers[0], this.credentials),
 		};
 	}
 
@@ -288,5 +288,19 @@ export class Etcd {
 		let token = new KeepAliveToken(handler, lease, interval);
 		this.keepAlives.push(token);
 		return token;
+	}
+
+	createTransaction(
+		compare: Array<EtcdCompare>,
+		success: Array<EtcdOpRequest>,
+		failure: Array<EtcdOpRequest>,
+	): Promise<any> {
+		let transaction = new EtcdTransaction(compare, success, failure);
+
+		return this.callClient(
+			"KV",
+			"txn",
+			transaction.getOp()
+		);
 	}
 }
